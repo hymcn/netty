@@ -99,12 +99,12 @@ public class IdleStateHandler extends ChannelDuplexHandler {
     private static final long MIN_TIMEOUT_NANOS = TimeUnit.MILLISECONDS.toNanos(1);
 
     // Not create a new ChannelFutureListener per write operation to reduce GC pressure.
-    private final ChannelFutureListener writeListener = new ChannelFutureListener() {
-        @Override
-        public void operationComplete(ChannelFuture future) throws Exception {
-            lastWriteTime = ticksInNanos();
-            firstWriterIdleEvent = firstAllIdleEvent = true;
-        }
+        private final ChannelFutureListener writeListener = new ChannelFutureListener() {
+            @Override
+            public void operationComplete(ChannelFuture future) throws Exception {
+                lastWriteTime = ticksInNanos();
+                firstWriterIdleEvent = firstAllIdleEvent = true;
+            }
     };
 
     private final boolean observeOutput;
